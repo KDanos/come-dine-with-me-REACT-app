@@ -1,3 +1,4 @@
+import { signUpService } from '../../services/auth'
 import './SignUpPage.css'
 import { useState } from 'react'
 
@@ -14,7 +15,7 @@ const SignUpPage = () => {
         setSignUpData({ ...signUpData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             console.log(
@@ -24,8 +25,10 @@ const SignUpPage = () => {
                 confirmPassword is ${signUpData.confirmPassword}`
             )
             console.log('you would like to sign up')
+            const response = await signUpService(signUpData)
+            console.log(response)
         } catch (error) {
-
+            console.log(error)
         }
 
     }
