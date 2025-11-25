@@ -27,6 +27,7 @@ const dinners = [
 const Home = () => {
   //State Variables
   const [ allUsers, setAllUsers ] = useState([])
+  
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -40,8 +41,6 @@ const Home = () => {
     loadUsers()
   }, []
   )
-
-  console.log('these are all the users', allUsers)
 
   return (
     <>
