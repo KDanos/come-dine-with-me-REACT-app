@@ -38,7 +38,7 @@ form{
     border: 1px solid lightgray;
     border-radius: 8px;
     font-size: 1em;
-    font-family: inherit;
+    /* font-family: inherit; */
     box-sizing: border-box;
 }
 

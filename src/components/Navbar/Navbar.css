@@ -1,3 +1,15 @@
+#navbar a {
+    font-family: cursive;
+    color: green;    
+    text-decoration: none;
+}
+#navbar a:active{
+    color: rgb(10, 0, 100);
+}
+
+#navbar a:hover {
+    text-decoration: underline;
+}
 #navbar {
     display: flex;
     gap: 1rem;
