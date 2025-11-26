@@ -21,13 +21,13 @@ const DinnerShowPage = () => {
     
 
     const loggedInUser = useContext(UserContext).user
-
+    console.log ('this is what the dinner.host.username looks like: ',dinner.host)
     return (
         <>
             <div id="top-ribbon">
                 <h3>dinner.date</h3>
                 <h1>{dinner.theme}</h1>
-                <h3>Hosted by {dinner.host.username}</h3>
+                <h3>Hosted by {dinner?.host?.username}</h3>
             </div>
             <div id="details-box">
                 <h2>Starter: {dinner.starter}</h2>

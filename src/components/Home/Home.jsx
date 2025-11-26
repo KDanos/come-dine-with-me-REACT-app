@@ -72,6 +72,7 @@ const Home = () => {
               <Link to={`/dinners/${dinner._id}`}>
                 <h2>Host: {dinner.host.username}</h2>
                 <p>Theme: {dinner.theme}</p>
+                <p>DinnerId: {dinner._id}</p>
                 <p>Guests: jeff</p>
               </Link>
             </div>
