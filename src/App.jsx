@@ -1,7 +1,7 @@
 import './App.css'
 import { Routes, Route } from 'react-router'
 import Home from './components/Home/Home'
-// import SignIn from './components/SignIn/SignIn'
+import SignInPage from './components/SignInPage/SignInPage'
 import SignUpPage from './components/SignUpPage/SignUpPage'
 import Navbar from './components/Navbar/Navbar'
 // import DinnerShow from './components/DinnerShow/DinnerShow'

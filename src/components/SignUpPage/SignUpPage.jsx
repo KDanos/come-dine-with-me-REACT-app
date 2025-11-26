@@ -22,21 +22,11 @@ const SignUpPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            // console.log(
-            //     `Username is ${signUpData.username},
-            //     email is ${signUpData.email}, 
-            //     password is ${signUpData.password} and
-            //     confirmPassword is ${signUpData.confirmPassword}`
-            // )
-            // console.log('you would like to sign up')
             //Send to the API the sign-up request with its data
             const response = await signUpService(signUpData)
-            // console.log(response)
-            //on success, return a success message
+            //On success, return a success message
             setSuccessMsg(`Welcome to the group ${signUpData.username}. Your registration has been successful`)
-
         } catch (error) {
-            console.log(error)
             setErrorData (error.response.data)
         }
 
