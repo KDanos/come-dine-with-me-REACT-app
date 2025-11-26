@@ -1,35 +1,58 @@
 import { signInService } from '../../services/auth'
 import './SignInPage.css'
-import { useState } from 'react'
-import { setToken } from '../../utils/token'
+import { useState, useContext } from 'react'
+import { getUserFromToken, setToken } from '../../utils/token'
+
+//Context
+import { UserContext } from '../../contexts/UserContext'
 
 const SignInPage = () => {
+    const { setUser } = useContext(UserContext)
+
     //State Variables
     const [signInData, setSignInData] = useState({
         username: "",
         password: ""
     })
-    const[errorData, setErrorData] = useState({})
+    const [errorData, setErrorData] = useState({})
 
     //Functions
     const handleSubmit = async (e) => {
-        e.preventDefault()     
-        try{
-        const response = await signInService (signInData)
-        //Retrieve the token from the the response
-        const userToken = response.data.token
-        //Save the token to local storage
-        if(userToken) setToken (userToken)
-        console.log(response)
-        console.log('you have succesfully signed in')
+        e.preventDefault()
+        try {
+            const response = await signInService(signInData)
+            //Retrieve the token from the the response
+            const userToken = response.data.token
+
+            //Save the token to local storage
+            if (userToken) setToken(userToken)
+
+            //Set the user state with the user found in the token
+            const userKD= getUserFromToken()
+            setUser(userKD)
+            console.log('the user is: ', userKD)
+
         } catch (error) {
-            setErrorData(error.response.data)
+            if (error.response){setErrorData(error.response.data)}
+            else if (error.request){
+                //Request was made but no response was received
+                console.error ('No response from server:', error.request)
+                console.log ('No response from server:', error.request)
+                setErrorData({general: 'Cannot connect to server'})
+            }else {
+                //Default response if neither error catchers above work
+                console.error ('Error from Konstantin: ', error.message)
+                console.log ('Error from Konstantin: ', error.message)
+                setErrorData ({general: error.message})
+            }
+            
         }
     }
 
+
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.name]: e.target.value })
-        setErrorData({...errorData, [e.target.name]:""})
+        setErrorData({ ...errorData, [e.target.name]: "" })
     }
     return (
         <>
