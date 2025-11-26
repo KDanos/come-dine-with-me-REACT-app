@@ -1,8 +1,9 @@
 import "./Home.css"
-import Dinner from "../Dinner/Dinner"
-import { findAllUsers } from "../../services/auth"
+// import Dinner from "../Dinner/Dinner"
+// import { findAllUsers } from "../../services/auth"
 import { useState, useEffect } from 'react'
 import { dinnerIndex } from "../../services/dinners"
+import { Link } from 'react-router'
 
  
 
@@ -69,8 +70,9 @@ const Home = () => {
           return (
             <div key={dinner._id} className='dinner-card'>
               <Link to={`/dinners/${dinner._id}`}>
-                <h2>{dinner.title}</h2>
-                <p>{dinner.text.substring(0, 20)}...</p>
+                <h2>Host: {dinner.host.username}</h2>
+                <p>Theme: {dinner.theme}</p>
+                <p>Guests: jeff</p>
               </Link>
             </div>
               )

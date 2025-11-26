@@ -11,3 +11,13 @@ body{
 input, textarea, select {
     font-family: 'Segoe UI', sans-serif;
 }
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.dinner-card{
+    background-color: rgb(150, 150,150 )
+}
