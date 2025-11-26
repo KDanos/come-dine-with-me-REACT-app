@@ -8,6 +8,9 @@ export const signUpService = (formData) => {
     return api.post ('/sign-up', formData)
 }
 
+export const signInService = (formData) =>{
+    return api.post ('sign-in', formData)
+}
 export const findAllUsers = () =>{
     return api.get('')
 }
