@@ -1,6 +1,7 @@
 import { signInService } from '../../services/auth'
 import './SignInPage.css'
 import { useState } from 'react'
+import { setToken } from '../../utils/token'
 
 const SignInPage = () => {
     //State Variables
@@ -11,10 +12,15 @@ const SignInPage = () => {
     const[errorData, setErrorData] = useState({})
 
     //Functions
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()     
         try{
-        signInService (signInData)
+        const response = await signInService (signInData)
+        //Retrieve the token from the the response
+        const userToken = response.data.token
+        //Save the token to local storage
+        if(userToken) setToken (userToken)
+        console.log(response)
         console.log('you have succesfully signed in')
         } catch (error) {
             setErrorData(error.response.data)
