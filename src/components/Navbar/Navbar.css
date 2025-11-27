@@ -23,3 +23,11 @@ nav {
     display: flex;
     gap: 1rem;
 }
+
+.user-name {
+    font-family: cursive;  
+    color: green;          
+    text-decoration: none;
+    cursor: default;
+    display: inline-block;
+}

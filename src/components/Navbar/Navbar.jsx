@@ -1,26 +1,46 @@
 
 import './Navbar.css'
-import { Link } from 'react-router'
+import { Link , useNavigate} from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
+import { useContext } from 'react'
 
-const Navbar = () => {
+const Navbar = (loggedInUser) => {
+    const { user, signOut } = useContext(UserContext)
+    const navigate = useNavigate()
+    
+    //Functions
+    const handleSignOut = ()=>{
+        signOut()
+        navigate('/')
+    }
     return (
 
         <div id="navbar">
             <nav id="leftNavbar">
                 <Link to='/'>Home</Link>
-                <Link to='/'>Host a dinner</Link>
-                <Link to='/dinners/6924840c5374a5252e2b870d'>Show a dinner</Link>
-
+                {user ? (
+                    <>
+                        <Link to="/dinners/new">Host a dinner</Link>
+                    </>
+                ) :(<></>)
+                }
             </nav>
             <nav id="rightNavbar">
-                <Link to='sign-in'>Sign-in</Link>
-                <Link to='sign-up'>Sign-up</Link>
-                <Link to='auth/userid'>User</Link>
-                <Link to='sign-out'>Sign-out</Link>
+                {user ? (
+                    <>
+                        <span className="user-name">{user.username}👤</span>
+                        <Link to='/' onClick={handleSignOut}>Sign-out</Link>
+                    </>
+                ) : (
+                    <>
+                        <Link to='sign-in'>Sign-in</Link>
+                        <Link to='sign-up'>Sign-up</Link>
+                    </>
+                )
+                }
             </nav>
         </div>
 
     )
 }
-
 export default Navbar
