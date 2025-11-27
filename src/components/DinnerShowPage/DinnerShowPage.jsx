@@ -2,13 +2,14 @@ import './DinnerShowPage.css'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { dinnerShow, dinnerDelete, dinnerUpdate } from '../../services/dinners'
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 import AllComments from '../AllComments/AllComments'
 
 const DinnerShowPage = () => {
+    
     const [dinner, setDinner] = useState('')
     const { dinnerId } = useParams()
-
+    const navigate = useNavigate()
     useEffect(() => {
         const getDinner = async () => {
             try {
@@ -34,19 +35,20 @@ const DinnerShowPage = () => {
     //Determine comment authorisatoin
 
     //Event handlers
-    const deleteDinner = () => {
+    const deleteDinner = async () => {
         //Check authorisation
         if (!canDelete()) {
-            alert('You can only delete your won dinners!')
+            alert('You can only delete your own dinners!')
             return
         }
         //Double check that the deletion should take place
         const deleteConfirmation = window.confirm('Are you sure you want to delete this dinner? This action cannot be undone! ')
         if (deleteConfirmation) {
             try {
-
+                await dinnerDelete(dinnerId)
+                navigate('/') 
             } catch (error) {
-
+                console.log('failed to delete the dinner')
             }
 
         }

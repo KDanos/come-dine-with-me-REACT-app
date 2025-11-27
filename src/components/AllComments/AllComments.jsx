@@ -51,8 +51,8 @@ const AllComments = ({ dinnerId, comments }) => {
                     ></textarea>
                     <button className="action-button" id="make-comment-button" onClick={handleCreateComment}>Submit comment</button>
                 </div>
-                {errorMsg && <p class="error-message">{`${errorMsg}`}</p>}
-                {successMsg && <p class="success-message">{`${successMsg}`}</p>}
+                {errorMsg && <p className="error-message">{`${errorMsg}`}</p>}
+                {successMsg && <p className="success-message">{`${successMsg}`}</p>}
             </div >
             <div id="comments-list-box">
                 {allComments && allComments.length > 0 ? (
