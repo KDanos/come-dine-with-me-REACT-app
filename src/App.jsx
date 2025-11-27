@@ -6,7 +6,7 @@ import SignUpPage from './components/SignUpPage/SignUpPage'
 import Navbar from './components/Navbar/Navbar'
 import DinnerShowPage from './components/DinnerShowPage/DinnerShowPage'
 import DinnerCreate from './components/DinnerCreate/DinnerCreate'
-// import DinnerUpdate from './components/DinnerUpdate/DinnerUpdate'
+import DinnerUpdateForm from './components/DinnerUpdateForm/DinnerUpdateForm'
 
 const App = () => {
 
@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/dinners/:dinnerId" element={<DinnerShowPage />} />
           <Route path="/dinners/new" element={<DinnerCreate />} />
-          {/* <Route path="/dinners/:dinnerId/edit" element={<dinnerUpdate />} /> */}
+          <Route path="/dinners/:dinnerId/edit" element={<DinnerUpdateForm />} />
         </Routes>
       </main>
     </>

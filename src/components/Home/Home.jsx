@@ -36,7 +36,7 @@ const Home = () => {
       <section>
         {dinners.map(dinner => {
             const cardClassName = `dinner-card${isHost(dinner) ? '-host' : ''}`
-            console.log(`Dinner ${dinner.theme}: className = "${cardClassName}"`)
+            //console.log(`Dinner ${dinner.theme}: className = "${cardClassName}"`)
           return (
             <div key={dinner._id} className={`dinner-card ${isHost(dinner)?'host':''}`}>
               
