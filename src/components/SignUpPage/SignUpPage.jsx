@@ -39,24 +39,22 @@ const SignUpPage = () => {
                 <div id="form-control">
                     <label hidden htmlFor="username">Username</label>
                     <input type="text" name="username" placeholder="Select a username" onChange={handleChange} required />
-                    {
-                        errorData.username &&
-                        <p className='error-message'>
-                            {`Username ${errorData.username} is already taken. Please select another`}
-                        </p>
-                    }
+                    {errorData.username && <p className='error-message'>{`${errorData.username} `}</p>}
                 </div>
                 <div id="form-control">
                     <label hidden htmlFor="email">Emaill</label>
                     <input type="text" name="email" placeholder="e.g. user@domaina.com" onChange={handleChange} required />
+                    {errorData.email && <p className='error-message'>{`${errorData.email} `}</p>}
                 </div>
                 <div id="form-control">
                     <label hidden htmlFor="password">Password</label>
                     <input type="password" name="password" placeholder="Please chose a password" onChange={handleChange} required />
+                    
                 </div>
                 <div id="form-control">
                     <label hidden htmlFor="confirmPassword">Password</label>
                     <input type="password" name="confirmPassword" placeholder="Please confirm your password" onChange={handleChange} required />
+                    {errorData.confirmPassword && <p className='error-message'>{`${errorData.confirmPassword} `}</p>}
                 </div>
 
                 <button type="submit" className='action-button'>Create an account</button>
