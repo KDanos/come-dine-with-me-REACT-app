@@ -1,34 +1,18 @@
 import "./Home.css"
-// import Dinner from "../Dinner/Dinner"
-// import { findAllUsers } from "../../services/auth"
-import { useState, useEffect } from 'react'
+import { useState, useEffect , useContext} from 'react'
 import { dinnerIndex } from "../../services/dinners"
 import { Link } from 'react-router'
-
- 
-
+import { UserContext } from "../../contexts/UserContext"
 
 
-// const dinners = [
-//   {
-//     theme: "Caribean",
-//     host: "bob3434",
-//     guests: "steve212",
-//     date: "30/11/2025"
-//   },
-//   {
-//     theme: "Malaysian",
-//     host: "steve212",
-//     guests: "bob3434",
-//     date: "2/12/2025"
-//   }
-
-// ]
 
 const Home = () => {
+  //Static Variables
+  const { user: loggedInUser } = useContext(UserContext)
+
   //State Variables
   const [dinners, setDinners] = useState([])
-  
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -41,56 +25,39 @@ const Home = () => {
     }
     getData()
   }, [])
-  
-  
-  
-  
-  const [ allUsers, setAllUsers ] = useState([])
 
-  
-
-  // useEffect(() => {
-  //   const loadUsers = async () => {
-  //     try {
-  //       const tempAllUsers = await findAllUsers()
-  //       setAllUsers(tempAllUsers.data)
-  //     } catch (error) {
-  //       console.error('There has been an error in the fetch hook', error)
-  //     }
-  //   }
-  //   loadUsers()
-  // }, []
-  // )
-
+  //Function to identify if user and host are the same
+  const isHost = (dinner) => {
+    return loggedInUser === dinner.host
+  }
   return (
     <>
       <h1>This is home</h1>
       <section>
         {dinners.map(dinner => {
+            const cardClassName = `dinner-card${isHost(dinner) ? '-host' : ''}`
+            console.log(`Dinner ${dinner.theme}: className = "${cardClassName}"`)
           return (
-            <div key={dinner._id} className='dinner-card'>
+            <div key={dinner._id} className={`dinner-card ${isHost(dinner)?'host':''}`}>
+              
               <Link to={`/dinners/${dinner._id}`}>
                 <h2>Host: {dinner.host.username}</h2>
-                <p>Theme: {dinner.theme}</p>
-                <p>DinnerId: {dinner._id}</p>
-                <p>Guests: jeff</p>
+                <p>{new Date(dinner.date).toLocaleDateString('en-GB')}</p>
+                <h3>Theme: {dinner.theme}</h3>
+                <p>Starter: {dinner.main}</p>
+                <p>Main: {dinner.main}</p>
+                <p>Dessert: {dinner.dessert}</p>
+
+                <p className="guests">
+                  Guests: {dinner.guests && dinner.guests.length > 0
+                    ? dinner.guests.map(guest => guest.username).join(', ')
+                    : 'None yet'}
+                </p>
               </Link>
             </div>
-              )
-            })}
+          )
+        })}
       </section>
-
-
-{/* <section>
-  {allUsers.map(person=>(
-    <div key={person._id}>
-      <p>Username: {person.username}</p>
-      <p>Email: {person.email}</p>
-    </div>
-  ))} 
-
-</section> */}
-
     </>
   )
 }
