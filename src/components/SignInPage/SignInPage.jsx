@@ -15,7 +15,8 @@ const SignInPage = () => {
         password: ""
     })
     const [errorData, setErrorData] = useState({})
-
+    const [successMsg, setSuccessMsg] = useState('')
+    
     //Functions
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,7 +31,7 @@ const SignInPage = () => {
             //Set the user state with the user found in the token
             const userKD= getUserFromToken()
             setUser(userKD)
-            console.log('the user is: ', userKD)
+            setSuccessMsg(`Welcome back ${userKD.username}`)
 
         } catch (error) {
             if (error.response){setErrorData(error.response.data)}
@@ -69,6 +70,7 @@ const SignInPage = () => {
                 </div>
 
                 <button className="action-button">Sign-in</button>
+                <p className="success-message">{successMsg}</p>
             </form>
 
         </>

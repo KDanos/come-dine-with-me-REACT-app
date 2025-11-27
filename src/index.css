@@ -21,3 +21,10 @@ section{
 .dinner-card{
     background-color: rgb(150, 150,150 )
 }
+
+p {
+  font-size: 2.0rem;  
+}
+ h3 {
+    font-size: 2rem;
+ }
