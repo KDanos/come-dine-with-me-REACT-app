@@ -1,5 +1,5 @@
 import './DinnerShowPage.css'
-import { useContext, useEffect, useState} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 import { dinnerShow, dinnerDelete, dinnerUpdate } from '../../services/dinners'
 import { useParams } from 'react-router'
@@ -8,7 +8,7 @@ import AllComments from '../AllComments/AllComments'
 const DinnerShowPage = () => {
     const [dinner, setDinner] = useState('')
     const { dinnerId } = useParams()
-    
+
     useEffect(() => {
         const getDinner = async () => {
             try {
@@ -19,34 +19,54 @@ const DinnerShowPage = () => {
             }
         }
         getDinner()
-    },[])
-    
+    }, [])
+
+    //Get the logged in user
     const loggedInUser = useContext(UserContext).user
-    const canDelete = ()=>{
-        if(!dinner.host || !loggedInUser) return false
-        const hostId = typeof dinner.host ==='string'? dinner.host:dinner.host._id
-        return hostId ===loggedInUser._id
+
+    //Determine delete/edit authorisation
+    const canDelete = () => {
+        if (!dinner.host || !loggedInUser) return false
+        const hostId = typeof dinner.host === 'string' ? dinner.host : dinner.host._id
+        return hostId === loggedInUser._id
     }
-      
+
+    //Determine comment authorisatoin
+
     //Event handlers
-    const deleteDinner =() =>{
-        console.log (`can delete? ${canDelete()}`)
-        console.log ('you want to delete this dinner')
+    const deleteDinner = () => {
+        //Check authorisation
+        if (!canDelete()) {
+            alert('You can only delete your won dinners!')
+            return
+        }
+        //Double check that the deletion should take place
+        const deleteConfirmation = window.confirm('Are you sure you want to delete this dinner? This action cannot be undone! ')
+        if (deleteConfirmation) {
+            try {
+
+            } catch (error) {
+
+            }
+
+        }
+        console.log(`can delete? ${canDelete()}`)
+        console.log('you want to delete this dinner')
     }
-    const editDinner =() =>{
-    console.log ('you want to edit this dinner')
+    const editDinner = () => {
+        console.log('you want to edit this dinner')
     }
 
     return (
         <>
             <div id="buttons-container">
-               <button className="action-button" id="edit-button" onClick = {editDinner}>Edit</button>
-               <button className="action-button"id="delete-button" onClick = {deleteDinner}>Delete</button>
+                <button className="action-button" id="edit-button" onClick={editDinner}>Edit</button>
+                <button className="action-button" id="delete-button" onClick={deleteDinner}>Delete</button>
             </div>
             <div id="top-ribbon">
-                <h3>{dinner.date?
-                new Date (dinner.date).toLocaleDateString():
-                'Loading ...'}</h3>
+                <h3>{dinner.date ?
+                    new Date(dinner.date).toLocaleDateString() :
+                    'Loading ...'}</h3>
                 <h1>{dinner.theme}</h1>
                 <h3>Hosted by {dinner?.host?.username}</h3>
             </div>
@@ -63,9 +83,9 @@ const DinnerShowPage = () => {
                 <p>Guest 4</p>
                 <p>Guest 5</p>
             </div>
-        <AllComments 
-        dinnerId={dinnerId}
-        comments = {dinner.comments || []}/>
+            <AllComments
+                dinnerId={dinnerId}
+                comments={dinner.comments || []} />
         </>
     )
 }

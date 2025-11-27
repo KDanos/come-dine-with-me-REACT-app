@@ -66,7 +66,7 @@ const SignInPage = () => {
                 </div>
                 <div id="form-control">
                     <label htmlFor="password" hidden>Username</label>
-                    <input type="text" name="password" placeholder="password" required onChange={handleChange} />
+                    <input type="password" name="password" placeholder="password" required onChange={handleChange} />
                 </div>
 
                 <button className="action-button">Sign-in</button>
