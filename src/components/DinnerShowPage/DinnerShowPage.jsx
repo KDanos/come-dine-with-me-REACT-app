@@ -56,7 +56,7 @@ const DinnerShowPage = () => {
         console.log('you want to delete this dinner')
     }
     const editDinner = () => {
-        console.log('you want to edit this dinner')
+        navigate(`/dinners/${dinnerId}/edit`)
     }
 
     return (
