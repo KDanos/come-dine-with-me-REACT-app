@@ -78,12 +78,18 @@ const DinnerShowPage = () => {
                 <h2>Desser: {dinner.dessert}</h2>
                 <h2>Drinks: {dinner.drink}</h2>
             </div>
-            <div id="guest-ribbon">
-                <p>Guests: </p>
-                <p>Guest 2</p>
-                <p>Guest 3</p>
-                <p>Guest 4</p>
-                <p>Guest 5</p>
+            <div id="guest-ribbon">                 
+                {dinner.guests && dinner.guests.length >0 ?(
+                    <>
+                    <p>Guests: </p>
+                    {dinner.guests.map((guest)=>                       
+                    <p key = {guest._id}> {guest.username}</p>
+                    
+                    )}
+                    </>
+                ):(
+                    <p><strong>{dinner?.host?.username}</strong> you should really be inviting some people to this party</p>
+                )} 
             </div>
             <AllComments
                 dinnerId={dinnerId}
