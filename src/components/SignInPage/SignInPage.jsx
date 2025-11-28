@@ -38,19 +38,15 @@ const SignInPage = () => {
             else if (error.request){
                 //Request was made but no response was received
                 console.error ('No response from server:', error.request)
-                console.log ('No response from server:', error.request)
                 setErrorData({general: 'Cannot connect to server'})
             }else {
                 //Default response if neither error catchers above work
                 console.error ('Error from Konstantin: ', error.message)
-                console.log ('Error from Konstantin: ', error.message)
                 setErrorData ({general: error.message})
             }
             
         }
     }
-
-
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.name]: e.target.value })
         setErrorData({ ...errorData, [e.target.name]: "" })
@@ -70,6 +66,7 @@ const SignInPage = () => {
                 </div>
 
                 <button className="action-button">Sign-in</button>
+                { errorData.message && <p className='error-message'>{errorData.message}</p>}
                 <p className="success-message">{successMsg}</p>
             </form>
 
