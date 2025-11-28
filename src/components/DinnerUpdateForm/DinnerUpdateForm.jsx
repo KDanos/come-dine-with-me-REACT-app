@@ -20,6 +20,7 @@ const DinnerUpdate = () => {
     guests: [],
   })
   const [errorData, setErrorData] = useState({})
+  const [guestInput, setGuestInput] = useState("")
 
   const navigate = useNavigate()
   const { dinnerId } = useParams()
@@ -42,11 +43,19 @@ const DinnerUpdate = () => {
       setErrorData(error.response.data)
     }
   }
+  console.log(formData.guests)
+  const handleAddGuest = () => {
+    if (!guestInput) return;
+    setFormData({...formData, guests: [...formData.guests, guestInput]})
+    setGuestInput("")
+  }
+
 
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await dinnerShow(dinnerId)
+        data.guests = data.guests.map(guest => guest.username)
         data.date = data.date.split("T")[0];
         setFormData(data)
       } catch (error) {
@@ -96,9 +105,18 @@ const DinnerUpdate = () => {
           <input type="date" name="date" id="date" placeholder='Date' required value={formData.date} onChange={handleChange} />
         </div>
 
+        <h2>Guests</h2>
+        <div className="attending-guests">
+          {formData.guests.length > 0 
+          ? formData.guests.map((guest, index) => <span key={index}>{guest}</span>)
+          : <p>No guests attending so far</p>
+        }
+        </div>
+
         <div className="form-control">
-          <label hidden htmlFor="guests">Guests</label>
-          <input type="text" name="guests" id="guests" placeholder='Guests' required value={formData.guests} onChange={handleChange} />
+          <label hidden htmlFor="guests">Add a guest</label>
+          <input type="text" name="guests" id="guests" placeholder='Add a guest' value={guestInput} onChange={(e) => setGuestInput(e.target.value)} />
+          <button type="button" onClick={handleAddGuest}>Add guest</button>
         </div>
 
 
