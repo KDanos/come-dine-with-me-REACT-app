@@ -47,6 +47,7 @@ const DinnerUpdate = () => {
     const getData = async () => {
       try {
         const { data } = await dinnerShow(dinnerId)
+        data.date = data.date.split("T")[0];
         setFormData(data)
       } catch (error) {
         console.log(error)
