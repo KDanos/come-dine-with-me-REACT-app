@@ -32,7 +32,13 @@ const Home = () => {
   }
   return (
     <>
-      <h1>This is home</h1>
+      <>
+      {loggedInUser? (
+        <h1>What are we doing today {loggedInUser.username}?</h1>
+      ):(
+        <h1>This is how we have dined so far</h1>
+      )}
+      </>
       <section>
         {dinners.map(dinner => {
             const cardClassName = `dinner-card${isHost(dinner) ? '-host' : ''}`
@@ -47,6 +53,7 @@ const Home = () => {
                 <p>Starter: {dinner.main}</p>
                 <p>Main: {dinner.main}</p>
                 <p>Dessert: {dinner.dessert}</p>
+                <p>Drinks: {dinner.drink}</p>
 
                 <p className="guests">
                   Guests: {dinner.guests && dinner.guests.length > 0

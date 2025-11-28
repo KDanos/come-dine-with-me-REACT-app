@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router'
 import AllComments from '../AllComments/AllComments'
 
 const DinnerShowPage = () => {
-    
+
     const [dinner, setDinner] = useState('')
     const { dinnerId } = useParams()
     const navigate = useNavigate()
@@ -27,16 +27,19 @@ const DinnerShowPage = () => {
 
     //Determine delete/edit authorisation
     const canDelete = () => {
+        // console.log('🔍 Debug canDelete:')
+        // console.log('dinner.host:', dinner.host)
+        // console.log('loggedInUser:', loggedInUser)
+        
         if (!dinner.host || !loggedInUser) return false
         const hostId = typeof dinner.host === 'string' ? dinner.host : dinner.host._id
         return hostId === loggedInUser._id
     }
 
     //Determine comment authorisatoin
-    const canEdit =()=>{
+    const canEdit = () => {
         return true
     }
-
 
     //Event handlers
     const deleteDinner = async () => {
@@ -47,11 +50,11 @@ const DinnerShowPage = () => {
         }
         //Double check that the deletion should take place
         const deleteConfirmation = window.confirm('Are you sure you want to delete this dinner? This action cannot be undone! ')
-        
+
         if (deleteConfirmation) {
             try {
                 await dinnerDelete(dinnerId)
-                navigate('/') 
+                navigate('/')
             } catch (error) {
                 console.log('failed to delete the dinner')
             }
@@ -61,24 +64,27 @@ const DinnerShowPage = () => {
         console.log('you want to delete this dinner')
     }
     const editDinner = () => {
-        if(!canEdit())
+        if (!canEdit())
             if (!canDelete()) {
                 alert('You can only delete your own dinners!')
                 return
             }
-            try {
-                navigate(`/dinners/${dinnerId}/edit`)
-            } catch (error) {
-                console.log('something went wrong trying to navigate tot he edit page')
-            }
+        try {
+            navigate(`/dinners/${dinnerId}/edit`)
+        } catch (error) {
+            console.log('something went wrong trying to navigate tot he edit page')
+        }
     }
 
     return (
         <>
-            <div id="buttons-container">
-                <button className="action-button" id="edit-button" onClick={editDinner}>Edit</button>
-                <button className="action-button" id="delete-button" onClick={deleteDinner}>Delete</button>
-            </div>
+            {canDelete() && (
+                <div id="buttons-container">
+                    <button className="action-button" id="edit-button" onClick={editDinner}>Edit</button>
+                    <button className="action-button" id="delete-button" onClick={deleteDinner}>Delete</button>
+                </div>
+            )}
+
             <div id="top-ribbon">
                 <h3>{dinner.date ?
                     new Date(dinner.date).toLocaleDateString() :
@@ -92,18 +98,18 @@ const DinnerShowPage = () => {
                 <h2>Desser: {dinner.dessert}</h2>
                 <h2>Drinks: {dinner.drink}</h2>
             </div>
-            <div id="guest-ribbon">                 
-                {dinner.guests && dinner.guests.length >0 ?(
+            <div id="guest-ribbon">
+                {dinner.guests && dinner.guests.length > 0 ? (
                     <>
-                    <p>Guests: </p>
-                    {dinner.guests.map((guest)=>                       
-                    <p key = {guest._id}> {guest.username}</p>
-                    
-                    )}
+                        <p>Guests: </p>
+                        {dinner.guests.map((guest) =>
+                            <p key={guest._id}> {guest.username}</p>
+
+                        )}
                     </>
-                ):(
+                ) : (
                     <p><strong>{dinner?.host?.username}</strong> you should really be inviting some people to this party</p>
-                )} 
+                )}
             </div>
             <AllComments
                 dinnerId={dinnerId}
