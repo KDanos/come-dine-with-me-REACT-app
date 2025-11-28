@@ -37,3 +37,7 @@
     justify-content: space-between;
     width: 100%;
 }
+
+#existing-comment-box p{
+    font-size: 1.6rem;
+}

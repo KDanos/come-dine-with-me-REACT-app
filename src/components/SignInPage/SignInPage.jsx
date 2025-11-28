@@ -5,9 +5,11 @@ import { getUserFromToken, setToken } from '../../utils/token'
 
 //Context
 import { UserContext } from '../../contexts/UserContext'
+import { useNavigate } from 'react-router'
 
 const SignInPage = () => {
     const { setUser } = useContext(UserContext)
+    const navigate = useNavigate()
 
     //State Variables
     const [signInData, setSignInData] = useState({
@@ -32,6 +34,7 @@ const SignInPage = () => {
             const userKD= getUserFromToken()
             setUser(userKD)
             setSuccessMsg(`Welcome back ${userKD.username}`)
+            navigate('/')
 
         } catch (error) {
             if (error.response){setErrorData(error.response.data)}
