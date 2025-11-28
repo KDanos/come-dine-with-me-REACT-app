@@ -33,6 +33,10 @@ const DinnerShowPage = () => {
     }
 
     //Determine comment authorisatoin
+    const canEdit =()=>{
+        return true
+    }
+
 
     //Event handlers
     const deleteDinner = async () => {
@@ -43,6 +47,7 @@ const DinnerShowPage = () => {
         }
         //Double check that the deletion should take place
         const deleteConfirmation = window.confirm('Are you sure you want to delete this dinner? This action cannot be undone! ')
+        
         if (deleteConfirmation) {
             try {
                 await dinnerDelete(dinnerId)
@@ -56,7 +61,16 @@ const DinnerShowPage = () => {
         console.log('you want to delete this dinner')
     }
     const editDinner = () => {
-        navigate(`/dinners/${dinnerId}/edit`)
+        if(!canEdit())
+            if (!canDelete()) {
+                alert('You can only delete your own dinners!')
+                return
+            }
+            try {
+                navigate(`/dinners/${dinnerId}/edit`)
+            } catch (error) {
+                console.log('something went wrong trying to navigate tot he edit page')
+            }
     }
 
     return (
