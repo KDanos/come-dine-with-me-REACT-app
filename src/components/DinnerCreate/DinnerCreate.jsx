@@ -84,7 +84,7 @@ const DinnerCreate = () => {
 
         <div className="form-control">
           <label hidden htmlFor="guests">Guests</label>
-          <input type="text" name="guests" id="guests" placeholder='Guests' required value={formData.guests} onChange={handleChange} />
+          <input type="text" name="guests" id="guests" placeholder='Guests' value={formData.guests} onChange={handleChange} />
         </div>
 
 
