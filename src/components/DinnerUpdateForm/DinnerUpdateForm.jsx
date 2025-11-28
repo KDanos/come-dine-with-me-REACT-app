@@ -116,7 +116,7 @@ const DinnerUpdate = () => {
         <div className="form-control">
           <label hidden htmlFor="guests">Add a guest</label>
           <input type="text" name="guests" id="guests" placeholder='Add a guest' value={guestInput} onChange={(e) => setGuestInput(e.target.value)} />
-          <button type="button" onClick={handleAddGuest}>Add guest</button>
+          <button id="add-guest" className="action-button"  type="button" onClick={handleAddGuest}>Add guest</button>
         </div>
 
 
