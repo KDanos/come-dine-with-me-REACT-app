@@ -14,7 +14,7 @@
     align-items: center;
     border: 1px solid grey;
     border-radius: 8px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 #make-comment-button {
@@ -39,5 +39,8 @@
 }
 
 #existing-comment-box p{
+    font-size: 1.6rem;
+}
+#comments-list-box p {
     font-size: 1.6rem;
 }
