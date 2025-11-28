@@ -103,7 +103,6 @@ const DinnerUpdate = () => {
 
 
         <button type="submit" className="action-button">Update Dinner</button>
-
         { errorData.message && <p className='error-message'>{errorData.message}</p>}
       </form>
     </>
