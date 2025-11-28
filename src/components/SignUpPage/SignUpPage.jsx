@@ -16,7 +16,7 @@ const SignUpPage = () => {
     //Functions
     const handleChange = (e) => {
         setSignUpData({ ...signUpData, [e.target.name]: e.target.value })
-        setErrorData({ ...errorData, [e.target.name]: '' })
+        setErrorData({ ...errorData, [e.target.name]: '' }) 
     }
 
     const handleSubmit = async (e) => {
@@ -59,6 +59,7 @@ const SignUpPage = () => {
 
                 <button type="submit" className='action-button'>Create an account</button>
                 <p className="success-message">{successMsg}</p>
+                { errorData.message && <p className='error-message'>{errorData.message}</p>}
             </form>
         </>
     )

@@ -49,7 +49,8 @@ const SignInPage = () => {
     }
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.name]: e.target.value })
-        setErrorData({ ...errorData, [e.target.name]: "" })
+        setErrorData({ ...errorData, [e.target.name]: "",message: "" })
+        setSuccessMsg('')
     }
     return (
         <>
