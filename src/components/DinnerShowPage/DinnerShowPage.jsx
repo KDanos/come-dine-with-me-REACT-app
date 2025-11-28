@@ -102,8 +102,8 @@ const DinnerShowPage = () => {
                 {dinner.guests && dinner.guests.length > 0 ? (
                     <>
                         <p>Guests: </p>
-                        {dinner.guests.map((guest) =>
-                            <p key={guest._id}> {guest.username}</p>
+                        {dinner.guests.map((guest,index) =>
+                            <p key={guest._id}> {guest.username}{index < dinner.guests.length - 1 && ','}</p>
 
                         )}
                     </>

@@ -14,11 +14,13 @@
     display:flex;
     align-items: center;
     text-align: center;
-    flex-direction: column;
+    
+    justify-content: center;
+    gap: 10px
 }
 
 #guest-ribbon p {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 #buttons-container {
